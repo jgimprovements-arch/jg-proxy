@@ -1,4 +1,4 @@
-export default async function albiProxy(req, res) {
+module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', '*');
@@ -21,9 +21,8 @@ export default async function albiProxy(req, res) {
     });
     const text = await r.text();
     res.setHeader('Cache-Control', 's-maxage=120');
-    res.status(r.status).send(text);
+    return res.status(r.status).send(text);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
-}
-
+};
