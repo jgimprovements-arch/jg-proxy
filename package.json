@@ -1,3 +1,5 @@
 {
-  "version": 2
+  "name": "jg-proxy",
+  "version": "1.0.0",
+  "type": "module"
 }
