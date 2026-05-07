@@ -3,7 +3,6 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
-
   // Handle invite action via POST
   if (req.method === 'POST') {
     const { action, email, name, role, market, hourly_rate } = req.body || {};
@@ -32,7 +31,6 @@ module.exports = async (req, res) => {
     }
     return res.status(400).json({ error: 'Unknown action' });
   }
-
   // GET — fetch Albi projects
   const ALBI_KEY = '135e4c0e-9d1b-46be-8f47-94951e93ffab';
   const page = req.query.page || '1';
