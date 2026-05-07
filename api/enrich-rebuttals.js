@@ -29,11 +29,21 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 module.exports = async (req, res) => {
-  // ── Cron auth gate ─────────────────────────────────────────────────────
+  // ── CORS headers (allow browser-based testing) ─────────────────────────
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+
+  // ── Auth gate: accepts either header OR ?secret=... query param ────────
   // Vercel cron sets 'authorization: Bearer <CRON_SECRET>' automatically.
-  // Reject anything else so this can't be hit publicly.
-  const auth = req.headers.authorization || '';
-  if (auth !== `Bearer ${process.env.CRON_SECRET}`) {
+  // For manual testing from a browser, you can pass ?secret=<CRON_SECRET>.
+  const headerAuth = req.headers.authorization || '';
+  const querySecret = (req.query && req.query.secret) || '';
+  const expected = process.env.CRON_SECRET;
+  const headerOk = expected && headerAuth === `Bearer ${expected}`;
+  const queryOk = expected && querySecret === expected;
+  if (!headerOk && !queryOk) {
     return res.status(401).json({ error: 'unauthorized' });
   }
 
