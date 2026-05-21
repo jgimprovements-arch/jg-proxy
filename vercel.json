@@ -3,11 +3,18 @@
     {
       "path": "/api/enrich-rebuttals",
       "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/expire-packets",
+      "schedule": "0 9 * * *"
     }
   ],
   "functions": {
     "api/enrich-rebuttals.js": {
       "maxDuration": 60
+    },
+    "api/expire-packets.js": {
+      "maxDuration": 30
     }
   }
 }
