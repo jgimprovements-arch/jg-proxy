@@ -18,6 +18,10 @@
     },
     "api/packet-merge.js": {
       "maxDuration": 60
+    },
+    "api/render-contract.js": {
+      "maxDuration": 60,
+      "memory": 1024
     }
   }
 }
