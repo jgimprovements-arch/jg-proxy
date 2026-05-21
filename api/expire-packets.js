@@ -10,24 +10,24 @@
 // Scheduled via vercel.json (see deployment notes at bottom of file).
 //
 // Security:
-//   - Endpoint requires Vercel's CRON_SECRET header. Requests without the
-//     correct secret get 401.
+//   - Endpoint requires Vercel's PACKET_CRON_SECRET header. Requests without
+//     the correct secret get 401.
 //   - Uses SUPABASE_SERVICE_ROLE_KEY (not anon key) so it can bypass RLS
 //     and update locked rows.
 //
 // Environment variables required (set in Vercel project settings):
 //   - SUPABASE_URL
 //   - SUPABASE_SERVICE_ROLE_KEY
-//   - CRON_SECRET
+//   - PACKET_CRON_SECRET
 // ============================================================================
 
 export default async function handler(req, res) {
   // -- AUTH GUARD ------------------------------------------------------------
-  // Vercel cron jobs send Authorization: Bearer ${CRON_SECRET} automatically.
+  // Vercel cron jobs send Authorization: Bearer ${PACKET_CRON_SECRET} automatically.
   // Reject anything else.
   const authHeader = req.headers.authorization || '';
-  const expected = `Bearer ${process.env.CRON_SECRET}`;
-  if (!process.env.CRON_SECRET || authHeader !== expected) {
+  const expected = `Bearer ${process.env.PACKET_CRON_SECRET}`;
+  if (!process.env.PACKET_CRON_SECRET || authHeader !== expected) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
