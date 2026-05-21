@@ -15,6 +15,9 @@
     },
     "api/expire-packets.js": {
       "maxDuration": 30
+    },
+    "api/packet-merge.js": {
+      "maxDuration": 60
     }
   }
 }
