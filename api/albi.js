@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Unknown action' });
   }
   // GET — fetch Albi projects
-  const ALBI_KEY = '135e4c0e-9d1b-46be-8f47-94951e93ffab';
+  const ALBI_KEY = '87549e5d-12b4-4ae6-9c49-aed434f00735';
   const page = req.query.page || '1';
   const pageSize = req.query.pageSize || '50';
   const location = req.query.location || '';
