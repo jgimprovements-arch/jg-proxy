@@ -23,7 +23,7 @@
 //   - PACKET_CRON_SECRET
 // ============================================================================
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // -- AUTH GUARD ------------------------------------------------------------
   const authHeader = req.headers.authorization || '';
   const expected = `Bearer ${process.env.PACKET_CRON_SECRET}`;
