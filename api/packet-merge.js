@@ -26,7 +26,7 @@
 //   { ok: true, merged_pdf_url: "https://...packet-vN.pdf", page_count: N }
 //   { ok: false, error: "..." }
 
-const { PDFDocument } = require('pdf-lib');
+import { PDFDocument } from 'pdf-lib';
 
 // CORS — GitHub Pages origin only (locks down to JG platform)
 const ALLOWED_ORIGINS = [
@@ -117,7 +117,7 @@ async function uploadToSupabase(bytes, path) {
   return `${url}/storage/v1/object/public/rebuild-documents/${path}`;
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   setCors(req, res);
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'POST only' });
@@ -166,7 +166,7 @@ module.exports = async function handler(req, res) {
 }
 
 // Larger body limit (PDFs are big — Xact can be 30MB)
-module.exports.config = {
+export const config = {
   api: {
     bodyParser: { sizeLimit: '50mb' },
   },
