@@ -1,5 +1,5 @@
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+const chromium = require('@sparticuz/chromium');
+const puppeteer = require('puppeteer-core');
 
 const ALLOWED_ORIGINS = [
   'https://jgimprovements-arch.github.io',
@@ -54,7 +54,7 @@ async function uploadToSupabase(bytes, path) {
   return `${url}/storage/v1/object/public/rebuild-documents/${path}`;
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   setCors(req, res);
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'POST only' });
@@ -110,7 +110,7 @@ export default async function handler(req, res) {
   }
 }
 
-export const config = {
+module.exports.config = {
   api: { bodyParser: { sizeLimit: '5mb' } },
   maxDuration: 60,
 };
