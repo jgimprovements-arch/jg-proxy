@@ -1,5 +1,11 @@
 {
+  "name": "jg-proxy-v2",
+  "version": "1.0.0",
+  "private": true,
+  "description": "JG Restoration platform proxy — Albi sync, PDF parsing, packet merge, contract render, QBO enrichment",
   "dependencies": {
-    "pdf-lib": "^1.17.1"
+    "pdf-lib": "^1.17.1",
+    "@sparticuz/chromium": "^123.0.1",
+    "puppeteer-core": "^22.6.5"
   }
 }
